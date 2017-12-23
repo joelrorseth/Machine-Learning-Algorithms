@@ -77,3 +77,22 @@ def standard_deviation(array):
 # IQ Range (a better range measure to handle outlier bias)
 def interquartile_range(array):
     return quantile(array, 0.75) - quantile(array, 0.25)
+
+
+
+# << Correlation >>
+# Covariance measures how two variables vary in tandem from their means
+def covariance(x, y):
+    return dot(deviations_mean(x), deviations_mean(y)) / (len(x)-1)
+
+
+# Divide the standard deviations of two lists (easily biased by outliers)
+def correlation(x, y):
+    stddev_x = standard_deviation(x)
+    stddev_y = standard_deviation(y)
+
+    # Must be some variation to yield non-zero correlation
+    if stddev_x > 0 and stddev_y > 0:
+        return covariance(x, y) / stddev_x / stddev_y
+    else:
+        return 0
